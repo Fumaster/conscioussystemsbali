@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mark Tulloch — Conscious Systems · Bali AI Consultant</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet" />
@@ -30,7 +31,11 @@
       color: var(--bone);
       font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
-      cursor: none;
+    }
+    body.custom-cursor { cursor: none; }
+    a:focus-visible, button:focus-visible {
+      outline: 1px solid var(--gold-light);
+      outline-offset: 3px;
     }
 
     /* ── CUSTOM CURSOR ── */
@@ -41,8 +46,9 @@
       border-radius: 50%;
       pointer-events: none; z-index: 9999;
       transform: translate(-50%,-50%);
-      transition: transform 0.1s ease, background 0.3s;
+      transition: transform 0.1s ease, background 0.3s, opacity 0.2s;
       mix-blend-mode: difference;
+      opacity: 0;
     }
     .cursor-ring {
       position: fixed; top: 0; left: 0;
@@ -52,7 +58,12 @@
       pointer-events: none; z-index: 9998;
       transform: translate(-50%,-50%);
       transition: transform 0.18s ease, opacity 0.3s;
-      opacity: 0.5;
+      opacity: 0;
+    }
+    body.cursor-on .cursor { opacity: 1; }
+    body.cursor-on .cursor-ring { opacity: 0.5; }
+    @media (hover: none), (pointer: coarse) {
+      .cursor, .cursor-ring { display: none; }
     }
 
     /* ── NOISE OVERLAY ── */
@@ -90,6 +101,20 @@
       transition: opacity 0.3s, color 0.3s;
     }
     .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+    .nav-toggle {
+      display: none;
+      width: 42px; height: 42px;
+      padding: 0;
+      border: 1px solid rgba(184,147,58,0.35);
+      background: transparent;
+      align-items: center; justify-content: center;
+      flex-direction: column; gap: 5px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 18px; height: 1px;
+      background: var(--bone);
+    }
 
     /* ── HERO ── */
     #hero {
@@ -102,7 +127,7 @@
 
     .hero-left {
       display: flex; flex-direction: column; justify-content: center;
-      padding: 10rem 5rem 6rem 4rem;
+      padding: 6.5rem 4.5rem 2rem 4rem;
       position: relative; z-index: 2;
     }
 
@@ -278,7 +303,7 @@
     }
 
     /* ── SECTION BASE ── */
-    section { padding: 7rem 4rem; position: relative; }
+    section { padding: 7rem 4rem; position: relative; scroll-margin-top: 4.5rem; }
     section.dark { background: var(--ink); }
     section.deep { background: var(--green-deep); }
     section.mid { background: #111; }
@@ -344,7 +369,7 @@
       text-transform: uppercase;
       z-index: 2;
     }
-    .about-text p {
+    .about-text p:not(.section-label) {
       margin-top: 2rem;
       font-size: 1.15rem;
       font-weight: 300;
@@ -352,7 +377,7 @@
       color: rgba(240,235,225,0.8);
       max-width: 52ch;
     }
-    .about-text p + p { margin-top: 1.2rem; }
+    .about-text p:not(.section-label) + p:not(.section-label) { margin-top: 1.2rem; }
     .about-quote {
       margin-top: 2.5rem;
       padding: 1.5rem 0 1.5rem 2rem;
@@ -613,7 +638,7 @@
       align-items: center;
       margin-bottom: 5rem;
     }
-    .bai-intro p {
+    .bai-intro p:not(.section-label) {
       font-size: 1.15rem;
       line-height: 1.8;
       color: rgba(240,235,225,0.75);
@@ -744,6 +769,10 @@
       transition: filter 0.4s ease, transform 0.4s ease;
     }
     .book-row img:hover { filter: none; transform: translateY(-3px); }
+    .book-row img.book-spread { object-position: right center; }
+    .book-row img.book-square { object-fit: contain; background: #ececec; filter: none; }
+    a.book-link { display: block; max-width: 360px; }
+    .tag { text-decoration: none; }
 
     /* ── MOMENTS ── */
     #moments {
@@ -784,7 +813,7 @@
       z-index: 2;
       opacity: 0.9;
     }
-    .media-info p {
+    .media-info p:not(.section-label) {
       margin-top: 1.5rem;
       font-size: 1.1rem;
       line-height: 1.8;
@@ -820,7 +849,13 @@
     }
     .contact-inner { position: relative; z-index: 1; }
     #contact h2 { margin: 0 auto 1.5rem; text-align: center; }
-    #contact p {
+    #contact .section-label { justify-content: center; }
+    #contact .section-label::after {
+      content: '';
+      width: 30px; height: 1px;
+      background: var(--gold);
+    }
+    #contact p:not(.section-label) {
       font-size: 1.2rem;
       font-style: italic;
       color: rgba(240,235,225,0.65);
@@ -875,6 +910,8 @@
       opacity: 0.5;
       letter-spacing: 0.3em;
     }
+    footer a { color: inherit; text-decoration: none; }
+    footer a:hover { color: var(--gold-light); }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
@@ -895,11 +932,37 @@
     .reveal-delay-2 { transition-delay: 0.3s; }
     .reveal-delay-3 { transition-delay: 0.45s; }
 
+    /* Keep eyebrow labels small and gold when a parent also styles paragraphs. */
+    p.section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      line-height: 1.4;
+      max-width: none;
+      margin-top: 0;
+      margin-bottom: 1.2rem;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      #hero { grid-template-columns: 1fr; }
+      #hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-right { display: none; }
-      .hero-left { padding: 8rem 2rem 4rem; }
+      .hero-left { padding: 7rem 1.5rem 1.25rem; }
+      .hero-stat-row {
+        position: static;
+        left: auto; right: auto; bottom: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem 1rem;
+        margin: 0;
+        padding: 0.5rem 1.5rem 2.5rem;
+        width: auto;
+      }
+      .hero-stat .num { font-size: 1.45rem; }
       h1 { font-size: 3rem; }
       #about { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-portrait { max-width: 360px; }
@@ -912,14 +975,70 @@
       .cs-strip { grid-template-columns: 1fr; }
       .moments-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; }
       .moment.large { grid-column: span 2; grid-row: span 2; }
-      section { padding: 5rem 2rem; }
-      nav { padding: 1.5rem 2rem; }
-      .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; }
+      #results, #contact { padding: 4.5rem 1.5rem; }
+      nav { padding: 1rem 1.25rem; background: rgba(14,14,14,0.94); }
+      .nav-toggle { display: inline-flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        flex-direction: column;
+        gap: 0;
+        padding: 0.25rem 1.5rem 1rem;
+        background: #0e0e0e;
+        border-bottom: 1px solid rgba(184,147,58,0.2);
+        z-index: 2;
+      }
+      .nav-links.is-open { display: flex; }
+      .nav-links a {
+        display: block;
+        padding: 0.9rem 0;
+        opacity: 0.9;
+        border-bottom: 1px solid rgba(240,235,225,0.08);
+      }
       .results-row { grid-template-columns: 1fr 1fr; }
       .services-grid { grid-template-columns: 1fr; }
       .cs-offerings { grid-template-columns: 1fr; }
+      footer {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    @media (max-height: 820px) and (min-width: 901px) {
+      .hero-left { padding: 4.75rem 3rem 1.5rem; }
+      .hero-eyebrow { margin-bottom: 1rem; }
+      h1 { font-size: clamp(2.5rem, 6vh, 3.4rem); }
+      .hero-sub { margin-top: 1rem; font-size: 1.05rem; }
+      .hero-ctas { margin-top: 1.25rem; }
+      .hero-stat-row { bottom: 1rem; gap: 2rem; }
+      .hero-stat .num { font-size: 1.45rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .hero-eyebrow, h1, .hero-sub, .hero-ctas, .hero-symbol, .hero-stat-row, .reveal {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
+  <noscript>
+    <style>
+      .reveal, .hero-eyebrow, h1, .hero-sub, .hero-ctas, .hero-symbol, .hero-stat-row {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    </style>
+  </noscript>
 </head>
 <body>
 
@@ -929,7 +1048,10 @@
   <!-- NAV -->
   <nav>
     <a class="nav-logo" href="#hero">MT · Clarity Before Capital</a>
-    <ul class="nav-links">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
       <li><a href="#about">Story</a></li>
       <li><a href="#cs">Conscious Systems</a></li>
       <li><a href="#bai">Bali AI</a></li>
@@ -1003,7 +1125,7 @@
   <!-- ABOUT -->
   <section id="about" class="dark">
     <div class="about-portrait reveal">
-      <img src="img1.jpg" alt="Mark Tulloch — Bali" />
+      <img src="img2.jpg" alt="Mark Tulloch working in Bali" />
       <span class="about-portrait-caption">Mark · Bali · 2026</span>
     </div>
     <div class="about-text reveal reveal-delay-1">
@@ -1131,7 +1253,7 @@
         <p>Not theory. Not demos. Deployed AI workflows that replaced a full marketing agency, cut costs by 80%, and scaled output across hospitality, property, media and consulting operations in Bali.</p>
         <p>Mark is a founding member of the Bali AI Founders Club and hosts the weekly Bali AI Investors Club — at the intersection of technology and the island's most dynamic business sector.</p>
         <div style="margin-top:2.5rem; display:flex; gap:1rem; flex-wrap:wrap;">
-          <a href="mailto:mark@bailaiconsultant.com" class="btn-primary"><span>Book a Consultation</span></a>
+          <a href="mailto:connect@baliaiconsultant.com" class="btn-primary"><span>Book a Consultation</span></a>
         </div>
       </div>
       <div class="reveal reveal-delay-1">
@@ -1205,7 +1327,7 @@
   </section>
 
   <!-- RESULTS -->
-  <section id="results" style="padding:5rem 4rem;">
+  <section id="results">
     <div class="results-row reveal">
       <div class="result-cell">
         <span class="result-num">35</span>
@@ -1213,7 +1335,7 @@
       </div>
       <div class="result-cell">
         <span class="result-num">£1M+</span>
-        <span class="result-label">Net Profit Margin<br>Delivered in UK</span>
+        <span class="result-label">Net Profit<br>Delivered in the UK</span>
       </div>
       <div class="result-cell">
         <span class="result-num">COO</span>
@@ -1229,11 +1351,13 @@
   <!-- BOOK / MEDIA -->
   <section id="media" class="dark">
     <div class="book-visual reveal">
-      <img class="book-main" src="img13.jpg" alt="Bipolar Aware — Mark Tulloch" />
+      <a class="book-link" href="https://www.amazon.com.au/dp/B0G4WVGFD6" target="_blank" rel="noopener noreferrer">
+        <img class="book-main" src="img13.jpg" alt="Bipolar Aware — Mark Tulloch" />
+      </a>
       <div class="book-row">
         <img src="img12.jpg" alt="The Pub, The Punch, and The Path" />
-        <img src="img14.jpg" alt="Still Here" />
-        <img src="img15.jpg" alt="The War Within" />
+        <img class="book-spread" src="img14.jpg" alt="Still Here" />
+        <img class="book-square" src="img15.jpg" alt="The War Within" />
       </div>
     </div>
     <div class="media-info reveal reveal-delay-1">
@@ -1242,10 +1366,11 @@
       <p>Written from 20+ years of lived experience with Bipolar Type 1, <em>Bipolar Aware</em> is not a memoir — it's a management system. Built to move people from surviving to thriving through pattern recognition, cycle tracking, and aligned action.</p>
       <p>Accompanied by two full music albums — <em>Systems of Light</em> and <em>Your Inner Voice</em> — distributed across Spotify, Apple Music, TikTok and YouTube with 100% royalties retained.</p>
       <div class="media-tags">
-        <span class="tag">Bipolar Aware</span>
+        <a class="tag" href="https://www.amazon.com.au/dp/B0G4WVGFD6" target="_blank" rel="noopener noreferrer">Bipolar Aware</a>
         <span class="tag">Systems of Light</span>
         <span class="tag">Your Inner Voice</span>
-        <span class="tag">Spotify · Apple · YouTube</span>
+        <a class="tag" href="https://open.spotify.com/artist/2lCB4waELfVxbflEzvKKNw" target="_blank" rel="noopener noreferrer">Spotify</a>
+        <a class="tag" href="https://www.youtube.com/@ConsciousSystems" target="_blank" rel="noopener noreferrer">YouTube</a>
         <span class="tag">Conscious Entrepreneur</span>
       </div>
     </div>
@@ -1258,10 +1383,10 @@
       <h2>From the <em>launch room</em> to the workshop floor.</h2>
     </div>
     <div class="moments-grid reveal reveal-delay-1">
-      <figure class="moment large"><img src="img16.jpg" alt="Bipolar Aware launch" /><figcaption>Bipolar Aware · Launch Night</figcaption></figure>
-      <figure class="moment"><img src="img17.jpg" alt="Launch event" /><figcaption>Reading · Bali</figcaption></figure>
+      <figure class="moment large"><img src="img16.jpg" alt="Bipolar Aware Kindle launch" /><figcaption>Bipolar Aware · Kindle</figcaption></figure>
+      <figure class="moment"><img src="img17.jpg" alt="Triple launch night at Sunshooters, Kerobokan" /><figcaption>Triple Launch · Kerobokan</figcaption></figure>
       <figure class="moment"><img src="img11.jpg" alt="Bali team" /><figcaption>The Sunshooters Crew</figcaption></figure>
-      <figure class="moment"><img src="img2.jpg" alt="Mark working in Bali" /><figcaption>Studio · Kerobokan</figcaption></figure>
+      <figure class="moment"><img src="img1.jpg" alt="Mark Tulloch boxing poster" /><figcaption>The Punch · Boxing</figcaption></figure>
       <figure class="moment"><img src="img3.jpg" alt="Mark ringside" /><figcaption>Ringside · Sussex Arms</figcaption></figure>
       <figure class="moment"><img src="img4.jpg" alt="Bali Realty" /><figcaption>Bali Realty · 2015–2025</figcaption></figure>
       <figure class="moment"><img src="img0.jpg" alt="Bali AI Consultant" /><figcaption>Bali AI · Consulting</figcaption></figure>
@@ -1271,14 +1396,18 @@
   <!-- CONTACT -->
   <section id="contact">
     <div class="contact-inner">
-      <p class="section-label" style="justify-content:center;">Connect</p>
+      <p class="section-label">Connect</p>
       <h2>Ready for <em>clarity</em>?</h2>
       <p>Whether you need an AI consultant for your Bali business, a Clarity Mapping session, or you want to explore what Conscious Systems can do for your team.</p>
-      <a href="mailto:mark@bailaiconsultant.com" class="btn-primary" style="display:inline-block; margin-bottom:3rem;"><span>Start the Conversation</span></a>
+      <a href="mailto:connect@baliaiconsultant.com" class="btn-primary" style="display:inline-block; margin-bottom:3rem;"><span>Start the Conversation</span></a>
       <div class="contact-cards">
         <div class="contact-card">
           <span class="contact-card-label">Bali AI Consulting</span>
-          <a href="mailto:mark@bailaiconsultant.com">mark@bailaiconsultant.com</a>
+          <a href="mailto:connect@baliaiconsultant.com">connect@baliaiconsultant.com</a>
+        </div>
+        <div class="contact-card">
+          <span class="contact-card-label">WhatsApp</span>
+          <a href="https://wa.me/6282144029645" target="_blank" rel="noopener noreferrer">+62 821 4402 9645</a>
         </div>
         <div class="contact-card">
           <span class="contact-card-label">Based In</span>
@@ -1290,7 +1419,7 @@
         </div>
         <div class="contact-card">
           <span class="contact-card-label">YouTube</span>
-          <a href="https://youtube.com/@BaliAiConsultant" target="_blank">@BaliAiConsultant</a>
+          <a href="https://www.youtube.com/@lumindrabali" target="_blank" rel="noopener noreferrer">@lumindrabali</a>
         </div>
       </div>
     </div>
@@ -1300,27 +1429,46 @@
   <footer>
     <p>© 2026 Mark Tulloch · Conscious Systems · Bali AI Consultant · All rights reserved</p>
     <span class="footer-mark">MT</span>
-    <p>Bali, Indonesia · mark@bailaiconsultant.com</p>
+    <p>Bali, Indonesia · <a href="mailto:connect@baliaiconsultant.com">connect@baliaiconsultant.com</a></p>
   </footer>
 
   <script>
-    // Cursor
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx + 'px';
-      cursor.style.top = my + 'px';
-    });
-    function animRing() {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.left = rx + 'px';
-      ring.style.top = ry + 'px';
-      requestAnimationFrame(animRing);
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (finePointer) {
+      document.body.classList.add('custom-cursor');
+      let mx = 0, my = 0, rx = 0, ry = 0;
+      document.addEventListener('mousemove', e => {
+        document.body.classList.add('cursor-on');
+        mx = e.clientX; my = e.clientY;
+        cursor.style.left = mx + 'px';
+        cursor.style.top = my + 'px';
+      });
+      const animRing = () => {
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        ring.style.left = rx + 'px';
+        ring.style.top = ry + 'px';
+        requestAnimationFrame(animRing);
+      };
+      animRing();
     }
-    animRing();
+
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const closeNav = () => {
+      navLinks.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open menu');
+    };
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNav));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
 
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
