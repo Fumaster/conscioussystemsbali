@@ -941,6 +941,34 @@
       .services-grid { grid-template-columns: 1fr; }
       .cs-offerings { grid-template-columns: 1fr; }
     }
+  
+    /* Turquoise edition: retain the original editorial layout and imagery. */
+    :root {
+      --ink: #063e43;
+      --green-deep: #07555b;
+      --green-mid: #0a6870;
+      --green-light: #0e7a81;
+      --mist: rgba(240,235,225,0.10);
+    }
+    body { background: #063e43; }
+    nav { background: linear-gradient(to bottom, rgba(4,53,58,.98), rgba(4,53,58,.80) 72%, transparent); }
+    .hero-left { background: linear-gradient(135deg, #075d65 0%, #064c53 100%); }
+    .hero-photo::after { background:
+      linear-gradient(to right, rgba(6,78,83,.72) 0%, rgba(6,78,83,.13) 40%, rgba(6,78,83,.48) 100%),
+      linear-gradient(to bottom, rgba(4,44,49,.25), transparent 42%, rgba(4,44,49,.72)); }
+    section.dark, section.deep, section.mid, #contact, footer { background-color: #07545b; }
+    section.deep { background-color: #06484f; }
+    section.mid { background-color: #09636b; }
+    .hero-sub, .nav-links a, .hero-stat .label { color: #f7f4ea; }
+    .hero-stat .label { opacity: .82; }
+    .hero-eyebrow, .nav-logo, .hero-stat .num { color: #f5c96e; }
+    .btn-primary { border-color: #f5c96e; color: #f5c96e; }
+    .btn-primary::before { background: #f5c96e; }
+    @media (max-width: 768px) {
+      .hero-left { background: #075d65; }
+      nav { background: rgba(4,53,58,.96); }
+    }
+
   </style>
 </head>
 <body>
