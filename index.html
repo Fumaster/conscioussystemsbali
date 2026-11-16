@@ -999,7 +999,14 @@
     #cs, #results, #moments { background:#07575e !important; }
     #hero .hero-left { background:#07575e; }
 
-  </style>
+  
+/* Preserve full composition of all three Clarity Mapping images. */
+.cs-strip { align-items:stretch; }
+.cs-strip figure { height:auto !important; min-height:0 !important; display:flex; flex-direction:column; background:rgba(0,0,0,.12); overflow:visible !important; }
+.cs-strip figure img { display:block; width:100%; height:auto !important; aspect-ratio:auto !important; object-fit:contain !important; object-position:center; }
+.cs-strip figure figcaption { position:static !important; transform:none !important; padding:12px 14px; }
+@media(max-width:768px){ .cs-strip figure img { max-height:75vh; } }
+</style>
 </head>
 <body>
 
