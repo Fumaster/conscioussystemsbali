@@ -907,6 +907,81 @@
       from { opacity: 0; } to { opacity: 1; }
     }
 
+    /* ── SERVICE TESTIMONIALS ── */
+    .testimonials { margin-top: 5rem; position: relative; z-index: 1; }
+    .testimonials-head { margin-bottom: 2.5rem; }
+    .testimonials-head h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 400;
+      color: var(--bone); margin-top: 0.75rem;
+    }
+    .testimonials-head h3 em { color: var(--gold-light); }
+    .testimonial-card {
+      position: relative;
+      padding: 3rem 3.5rem;
+      background: rgba(240,235,225,0.035);
+      border: 1px solid rgba(184,147,58,0.18);
+      max-width: 900px;
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      color: rgba(184,147,58,0.15);
+      position: absolute; top: -2rem; left: 1.5rem;
+      line-height: 1;
+    }
+    .testimonial-meta {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin-bottom: 1.75rem;
+    }
+    .testimonial-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.2em;
+      color: var(--gold);
+      border: 1px solid rgba(184,147,58,0.3);
+      padding: 0.25rem 0.6rem;
+      text-transform: uppercase;
+    }
+    .testimonial-pull {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-style: italic; line-height: 1.45;
+      color: var(--parchment);
+      margin-bottom: 1.75rem;
+    }
+    .testimonial-body p {
+      font-size: 1rem; line-height: 1.8;
+      color: rgba(240,235,225,0.68);
+      margin-bottom: 1.1rem;
+    }
+    .testimonial-card details summary {
+      cursor: pointer; list-style: none;
+      display: inline-block; margin: 0.5rem 0 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.2em;
+      color: var(--gold-light);
+      border-bottom: 1px solid rgba(212,168,75,0.4);
+      padding-bottom: 0.2rem;
+    }
+    .testimonial-card details summary::-webkit-details-marker { display: none; }
+    .testimonial-card details summary::after { content: ' +'; }
+    .testimonial-card details[open] summary::after { content: ' −'; }
+    .testimonial-card details[open] summary .more { display: none; }
+    .testimonial-card details:not([open]) summary .less { display: none; }
+    .testimonial-card cite {
+      display: block; margin-top: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.2em;
+      color: var(--gold); font-style: normal;
+    }
+    .testimonial-empty {
+      padding: 2.5rem 3rem;
+      border: 1px dashed rgba(184,147,58,0.25);
+      color: rgba(240,235,225,0.5);
+      font-size: 1rem; line-height: 1.7;
+      max-width: 900px;
+    }
+
     /* Scroll-reveal */
     .reveal {
       opacity: 0; transform: translateY(30px);
@@ -940,6 +1015,8 @@
       .results-row { grid-template-columns: 1fr 1fr; }
       .services-grid { grid-template-columns: 1fr; }
       .cs-offerings { grid-template-columns: 1fr; }
+      .testimonial-card { padding: 2.5rem 1.75rem; }
+      .testimonial-pull { font-size: 1.35rem; }
     }
   </style>
 </head>
@@ -1139,6 +1216,34 @@
       <figure><img src="img7.jpg" alt="Clarity Mapping in Bali" /><figcaption>In-person · Bali</figcaption></figure>
       <figure><img src="img8.jpg" alt="Clarity Mapping online" /><figcaption>Remote · Worldwide</figcaption></figure>
     </div>
+    <div class="testimonials reveal" id="cs-testimonials">
+      <div class="testimonials-head">
+        <p class="section-label">Conscious Systems · Testimonials</p>
+        <h3>In their <em>own words</em>.</h3>
+      </div>
+      <article class="testimonial-card">
+        <div class="testimonial-meta">
+          <span class="testimonial-tag">Service · Clarity Mapping</span>
+          <span class="testimonial-tag">Client · SM</span>
+        </div>
+        <p class="testimonial-pull">“Don’t get me wrong I still have dark days but with the help of this system the light is getting closer.”</p>
+        <div class="testimonial-body">
+          <p>For the last year and a half I’ve been in a dark dark place and now I’m climbing out of the darkness I know that it’s not going to happen overnight but it’s going to happen. I’ll put things into perspective when I was young some unthinkable things happened to me by a person who I trusted. When I got older my life was surrounded by violence, alcohol, drugs and all the things that go with that lifestyle, the whole time I kept the horrible things that happened to me and the things that I had done bottled up inside.</p>
+        </div>
+        <details>
+          <summary><span class="more">READ THE FULL STORY</span><span class="less">SHOW LESS</span></summary>
+          <div class="testimonial-body">
+            <p>Fast forward several years I met Mark and life was still pretty crazy. After a while we went our separate ways still remaining good friends but living on opposite sides of the world he was the best man at my wedding and god father to my daughter. Fast forward several more years and my marriage ended through reasons I’d prefer not to get into.</p>
+            <p>Anyway 15 years after my marriage dissolved I found myself in Thailand with no real purpose in life but I was out of Australia and thought that life was going to be awesome. How wrong I was, after about 5 months of being here with my new partner and owning a small convenience store my whole world came crashing down around me. My business was failing I was smoking copious amounts of weed and drinking like a fish, all of a sudden my awesome life was no more. The nightmares were more intense and more frequent, I was alone in a foreign country I didn’t speak the lingo let alone understand it. My new partner and I were fighting and she would distance herself from me, my life was in free fall and I was spiraling out of control.</p>
+            <p>Anyway 2 suicide attempts later and heading for a third that I was hellbent on succeeding with I was doom scrolling on social media one day and seen Mark running a speal about Clarity Mapping, I thought WTF is this shit? A few days later I was in the dumps again and decided to reach out to him to see what it was about and if nothing else to say goodbye.</p>
+            <p>Mark setup a video chat appointment and we went through my life I opened up and for the first time since I was 12 years old I let everything out that I had bottled up inside. Believe me it was extremely difficult and emotional for me because this is my life long friend but this wasn’t a friendly chat it was a professional, private session and I was on my last legs.</p>
+            <p>Mark sent me the personalized clarity mapping system that he created for me and for the last month I have been using the system and tools within it and things are changing for me. I’m not saying that it is a miracle but for me it’s working I was extremely skeptical but I gave it a go and continue to. Don’t get me wrong I still have dark days but with the help of this system the light is getting closer.</p>
+            <p>I’m not trying to give him a plug because he’s my mate he has created a system that if you follow it, it works you just have to give it a go.</p>
+          </div>
+        </details>
+        <cite>— SM · Clarity Mapping client</cite>
+      </article>
+    </div>
   </section>
 
   <div class="divider"><div class="divider-line"></div><div class="divider-glyph">◆</div><div class="divider-line"></div></div>
@@ -1223,6 +1328,13 @@
         <p>From zero to deployed: full website builds, brand identities and digital infrastructure for Bali-based businesses.</p>
         <span class="service-tag">Digital</span>
       </div>
+    </div>
+    <div class="testimonials reveal" id="bai-testimonials">
+      <div class="testimonials-head">
+        <p class="section-label">Bali AI Consultant · Testimonials</p>
+        <h3>What <em>clients</em> say.</h3>
+      </div>
+      <p class="testimonial-empty">Client stories from Bali AI Consultant projects are on their way. Have we worked together? <a href="mailto:mark@bailaiconsultant.com" style="color:var(--gold-light);">Share your experience</a>.</p>
     </div>
   </section>
 
